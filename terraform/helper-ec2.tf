@@ -9,7 +9,7 @@ resource "aws_instance" "helper-ec2" {
     apt update
     apt install -y git curl zip jq
     wget https://github.com/grafana/k6/releases/download/v0.52.0/k6-v0.52.0-linux-amd64.deb -P /
-    dpkg -i /k6-v0.51.0-linux-amd64.deb && rm -f /k6-v0.51.0-linux-amd64.deb
-    git clone https://github.com/bds-cho/ba.git /root/
+    dpkg -i /k6-v0.52.0-linux-amd64.deb && rm -f /k6-v0.52.0-linux-amd64.deb
+    cd /root/ && git clone https://github.com/bds-cho/ba.git
   EOL
 }

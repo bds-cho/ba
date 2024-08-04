@@ -1,5 +1,5 @@
 resource "aws_db_instance" "rds" {
-  allocated_storage = 1
+  allocated_storage = 5
   db_name = "rds"
   identifier = "rds"
   engine = "mysql"
@@ -11,8 +11,7 @@ resource "aws_db_instance" "rds" {
   multi_az = false
   publicly_accessible = true
   availability_zone = var.az
-}
-
-output "rds_endpoint" {
-  value       = aws_db_instance.rds.endpoint
+  provisioner "local-exec" {
+    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./util/rds-data-gen.sql"
+  }
 }

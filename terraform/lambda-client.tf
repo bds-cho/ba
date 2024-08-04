@@ -16,12 +16,12 @@ resource "aws_iam_role" "iam_for_lambda" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "${path.module}/../util/test.js"
-  output_path = "${path.module}/../util/test.zip"
+  source_file = "${path.module}/util/test.js"
+  output_path = "${path.module}/util/test.zip"
 }
 
 resource "aws_lambda_function" "test" {
-  filename      = "${path.module}/../util/test.zip"
+  filename      = "${path.module}/util/test.zip"
   function_name = "test"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "test.handler"

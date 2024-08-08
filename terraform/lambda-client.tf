@@ -25,7 +25,7 @@ resource "aws_lambda_function" "test" {
   function_name = "test"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "test.handler"
-  runtime = "nodejs18.x"
+  runtime       = "nodejs18.x"
 }
 
 resource "aws_lambda_function_url" "public_url" {

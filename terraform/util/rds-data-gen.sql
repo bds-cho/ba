@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 INSERT INTO users (name, address, email)
 SELECT 
     CONCAT('Name', FLOOR(1 + (RAND() * 999))),
-    CONCAT('Musterstrasse ', FLOOR(1 + (RAND() * 999)), ' , Berlin, Germany'),
+    CONCAT('Musterstrasse ', FLOOR(1 + (RAND() * 999)), ', Berlin, Germany'),
     CONCAT('user', FLOOR(1 + (RAND() * 999)), '@tu-berlin.com')
 FROM 
     (SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10) a,

@@ -1,3 +1,4 @@
+import exec from 'k6/execution';
 import sql from 'k6/x/sql';
 
 export const options = {
@@ -29,11 +30,16 @@ function randomIntFromInterval(min, max) {
 }
 
 // CONNECT TO RDS (MYSQL)
-const db = sql.open('mysql', 'admin:adminadmin@tcp(rds.cja2s0gm0289.eu-central-1.rds.amazonaws.com:3306)/rds-mysql-db');
+const db = sql.open('mysql','admin:adminadmin@tcp(rds.cja2s0gm0289.eu-central-1.rds.amazonaws.com:3306)/rds-mysql-db');
 
 // ITERATION FUNCTION
 export default function () {
-    const query = "SELECT * FROM users WHERE users.id = "+(randomIntFromInterval(1,1000))+";"
-    const result = sql.query(db,query);
-    console.log(toString(result));
+  const req_id = parseFloat(exec.vu.idInTest + '.' + exec.vu.iterationInInstance);
+  const query = "SELECT * FROM users WHERE users.id = "+(randomIntFromInterval(1,1000))+";"
+  
+  const start = Date.now();
+  const result = sql.query(db,query);
+  const end = Date.now();
+  
+  console.log(req_id+'##'+start+'##'+JSON.stringify(toString(result))+'##'+end);
 }

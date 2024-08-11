@@ -1,4 +1,5 @@
 import http from 'k6/http';
+import exec from 'k6/execution';
 import {Endpoint,SignatureV4} from 'https://jslib.k6.io/aws/0.12.3/signature.js';
 
 export const options = {
@@ -52,8 +53,12 @@ export default function () {
       body: payload
     }
   );
-  // EXECUTE REQUEST  
+
+  const req_id = parseFloat(exec.vu.idInTest + '.' + exec.vu.iterationInInstance);
+  
+  const start = Date.now();
   const res = http.post(signedRequest.url, signedRequest.body ,{headers: signedRequest.headers});
-  // LOG
-  console.log('Status:'+res.status+';Response:'+res.body);
+  const end = Date.now();
+
+  console.log(req_id+'##'+res.status+'##'+start+'##'+res.body+'##'+end);
 }

@@ -1,8 +1,8 @@
-resource "aws_instance" "helper-ec2" {
+resource "aws_instance" "ec2-client" {
   ami               = "ami-0e872aee57663ae2d" # ubuntu-server-24.04-amd64-hvm
   instance_type     = "t2.micro"              # 1CPU-1GiB
-  tags              = { Name = "helper-ec2" }
-  availability_zone = var.az
+  tags              = { Name = "ec2-client" }
+  availability_zone = "eu-central-1a"
 
   user_data = <<-EOL
     #!/bin/bash -xe

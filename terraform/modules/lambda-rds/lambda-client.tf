@@ -20,11 +20,11 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
   policy_arn  = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
-resource "aws_lambda_function" "test" {
+resource "aws_lambda_function" "lambda-rds-fn" {
   filename      = "${path.module}/../../util/lambda-rds-fn.zip"
-  function_name = "test"
+  function_name = "lambda-rds-fn"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "lambda-dynamo-fn.handler"
+  handler       = "lambda-rds-fn.handler"
   runtime       = "nodejs20.x"
   #vpc_config {
   #  subnet_ids = [ "subnet-0658837f6a09e2595" ]
@@ -33,7 +33,7 @@ resource "aws_lambda_function" "test" {
 }
 
 resource "aws_lambda_function_url" "public_url" {
-  function_name      = aws_lambda_function.test.function_name
+  function_name      = aws_lambda_function.lambda-rds-fn.function_name
   authorization_type = "NONE"
 }
 

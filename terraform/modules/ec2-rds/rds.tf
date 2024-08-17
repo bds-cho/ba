@@ -12,6 +12,6 @@ resource "aws_db_instance" "rds" {
   publicly_accessible = true
   availability_zone   = "eu-central-1a"
   provisioner "local-exec" {
-    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./../../util/rds-data-gen.sql"
+    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./util/rds-data-gen.sql"
   }
 }

@@ -8,6 +8,7 @@ resource "aws_instance" "ec2-client" {
     #!/bin/bash -xe
     apt update
     apt install -y git
-    cd /root/ && git clone https://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@github.com/bds-cho/ba.git
+    git clone https://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@github.com/bds-cho/ba.git
+    mkdir /root/k6 && cp /ba/k6-workspace/{k6,rds.js} /root/k6/ && rm -R /ba
   EOL
 }

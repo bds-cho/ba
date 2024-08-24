@@ -33,17 +33,10 @@ resource "aws_lambda_function" "lambda-dynamo-fn" {
   handler       = "lambda-dynamo-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
-  #vpc_config {
-  #  subnet_ids = [ "subnet-0658837f6a09e2595" ]
-  #  security_group_ids = [ "sg-06f602494cd511886" ]
-  #}
+  depends_on = [ aws_dynamodb_table_item.items ]
 }
 
 resource "aws_lambda_function_url" "public_url" {
   function_name      = aws_lambda_function.lambda-dynamo-fn.function_name
   authorization_type = "NONE"
-}
-
-output "path" {
-  value = path.module
 }

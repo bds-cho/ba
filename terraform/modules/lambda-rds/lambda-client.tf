@@ -27,10 +27,7 @@ resource "aws_lambda_function" "lambda-rds-fn" {
   handler       = "lambda-rds-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
-  #vpc_config {
-  #  subnet_ids = [ "subnet-0658837f6a09e2595" ]
-  #  security_group_ids = [ "sg-06f602494cd511886" ]
-  #}
+  depends_on = [ aws_db_instance.rds ]
 }
 
 resource "aws_lambda_function_url" "public_url" {

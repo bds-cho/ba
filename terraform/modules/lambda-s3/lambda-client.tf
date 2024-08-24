@@ -33,10 +33,7 @@ resource "aws_lambda_function" "lambda-s3-fn" {
   handler       = "lambda-s3-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
-  #vpc_config {
-  #  subnet_ids = [ "subnet-0658837f6a09e2595" ]
-  #  security_group_ids = [ "sg-06f602494cd511886" ]
-  #}
+  depends_on = [ aws_s3_object.object ]
 }
 
 resource "aws_lambda_function_url" "public_url" {

@@ -33,6 +33,7 @@ resource "aws_lambda_function" "lambda-s3-fn" {
   handler       = "lambda-s3-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
+  memory_size = 1769      // 1CPU-1.65GiB
   depends_on = [ aws_s3_object.object ]
 }
 

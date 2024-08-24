@@ -27,6 +27,7 @@ resource "aws_lambda_function" "lambda-rds-fn" {
   handler       = "lambda-rds-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
+  memory_size = 1769      // 1CPU-1.65GiB
   depends_on = [ aws_db_instance.rds ]
 }
 

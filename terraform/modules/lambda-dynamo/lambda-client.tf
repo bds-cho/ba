@@ -33,6 +33,7 @@ resource "aws_lambda_function" "lambda-dynamo-fn" {
   handler       = "lambda-dynamo-fn.handler"
   runtime       = "nodejs20.x"
   reserved_concurrent_executions = 990
+  memory_size = 1769      // 1CPU-1.65GiB
   depends_on = [ aws_dynamodb_table_item.items ]
 }
 

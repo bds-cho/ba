@@ -25,11 +25,6 @@ const signer = new SignatureV4({
   applyChecksum: true,
 });
 
-// UTIL FUNCTIONS
-function randomIntFromInterval(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min).toString();
-}
-
 // ITERATION FUNCTION
 export default function () {
   // DYNAMIC PAYLOAD CREATION (QUERY)
@@ -37,7 +32,7 @@ export default function () {
     TableName: 'dynamo',
     KeyConditionExpression: 'id = :id',
     ExpressionAttributeValues: {
-      ':id': { N: randomIntFromInterval(1,10) }  // Querying for id = 1
+      ':id': { N: '5' }     // QUERY: GET ITEM WHERE ID == 5
     }
   });
   // SIGN REQUEST

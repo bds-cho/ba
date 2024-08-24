@@ -24,18 +24,13 @@ function toString(data){
   });
 }
 
-// UTIL FUNCTION TO GENERATE RANDOM INT
-function randomIntFromInterval(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 // CONNECT TO RDS (MYSQL)
 const db = sql.open('mysql','admin:adminadmin@tcp(rds.cja2s0gm0289.eu-central-1.rds.amazonaws.com:3306)/rds-mysql-db');
 
 // ITERATION FUNCTION
 export default function () {
   const req_id = parseFloat(exec.vu.idInTest + '.' + exec.vu.iterationInInstance);
-  const query = "SELECT * FROM users WHERE users.id = "+(randomIntFromInterval(1,1000))+";"
+  const query = "SELECT * FROM users WHERE users.id = 500;";      // QUERY: WHERE ID == 500
   
   const start = Date.now();
   const result = sql.query(db,query);

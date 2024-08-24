@@ -12,6 +12,8 @@ resource "aws_instance" "ec2-client" {
     git clone https://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@github.com/bds-cho/ba.git
     mkdir /root/k6 && cp /ba/k6-workspace/{k6,rds.js} /root/k6/ && rm -R /ba
     nohup sh -c "while true; do uptime >> /root/k6/cpu-ec2-rds-${formatdate("YYYYMMDD-hhmmss", timestamp())}-runX.log; sleep 1; done" &
+    #cd /root/k6 && ./k6 run --log-format=json --log-output=file=./lambda-rds-$(date +%s)-runX.log ./helper.js
+    #aws s3 cp /root/k6/ s3://ba-bench-data --recursive --exclude "*" --include "*.log"
   EOL
 }
 

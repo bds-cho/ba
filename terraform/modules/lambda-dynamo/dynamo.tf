@@ -1,7 +1,7 @@
 resource "aws_dynamodb_table" "dynamo" {
   name           = "dynamo"
   billing_mode   = "PROVISIONED"
-  read_capacity  = 5
+  read_capacity  = 25
   write_capacity = 5
   hash_key       = "id"
   attribute {

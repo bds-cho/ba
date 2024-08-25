@@ -11,8 +11,8 @@ resource "aws_instance" "helper-ec2" {
     apt install -y git && snap install aws-cli --classic && export PATH=$PATH:/snap/bin
     export LAMBDA=${aws_lambda_function_url.public_url.function_url} && echo "export LAMBDA=$LAMBDA" >> /root/.bashrc
     git clone https://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@github.com/bds-cho/ba.git
-    mkdir /root/k6 && cp /ba/k6-workspace/{k6,helper.js} /root/k6/ && rm -R /ba
-    #cd /root/k6 && ./k6 run --log-format=json --log-output=file=./lambda-rds-$(date +%s)-runX.log ./helper.js
+    mkdir /root/k6 && cp /ba/k6-workspace/{k6,helper-lambda-rds.js} /root/k6/ && rm -R /ba
+    #cd /root/k6 && ./k6 run --log-format=json --log-output=file=./lambda-rds-<constant/spike>-$(date +%s)-runX.log -e LOAD=<constant/spiky> ./helper-lambda-rds.js
     #aws s3 cp /root/k6/ s3://ba-bench-data --recursive --exclude "*" --include "*.log"
   EOL
 }

@@ -1,5 +1,6 @@
 import exec from 'k6/execution';
 import sql from 'k6/x/sql';
+import { spiky_stages } from './util,js';
 
 var config = {};
 if (__ENV.LOAD == "constant") {
@@ -24,18 +25,7 @@ if (__ENV.LOAD == "constant") {
         timeUnit: '1s',
         preAllocatedVUs: 5,
         maxVUs: 20,
-        stages: [
-          {target: 2, duration: '2m'},
-          {target: 25, duration: '15s'},
-          {target: 2, duration: '15s'},
-          {target: 2, duration: '3m'},
-          {target: 25, duration: '15s'},
-          {target: 2, duration: '15s'},
-          {target: 2, duration: '3m'},
-          {target: 25, duration: '15s'},
-          {target: 2, duration: '15s'},
-          {target: 2, duration: '2m30s'}
-        ]
+        stages: spiky_stages
       }
     }
   }

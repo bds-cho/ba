@@ -1,5 +1,6 @@
 import exec from 'k6/execution';
 import http from 'k6/http';
+import {spiky_stages, spiky_stages_s3} from './util.js';
 
 var config = {};
 if (__ENV.LOAD == "constant") {
@@ -24,28 +25,7 @@ if (__ENV.LOAD == "constant") {
         timeUnit: '5s',
         preAllocatedVUs: 1,
         maxVUs: 10,
-        stages: [
-          {target: 1, duration: '20m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 80, duration: '15s'},
-          {target: 1, duration: '15s'},
-          {target: 1, duration: '6m'},
-          {target: 1, duration: '10m'}
-        ]
+        stages: spiky_stages_s3
       }
     }
   }

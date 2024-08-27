@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import exec from 'k6/execution';
 import {Endpoint,SignatureV4} from 'https://jslib.k6.io/aws/0.12.3/signature.js';
+import {spiky_stages} from './util.js';
 
 var config = {};
 if (__ENV.LOAD == "constant") {
@@ -25,18 +26,7 @@ if (__ENV.LOAD == "constant") {
         timeUnit: '1s',
         preAllocatedVUs: 5,
         maxVUs: 20,
-        stages: [
-          {target: 2, duration: '2h'},
-          {target: 25, duration: '15m'},
-          {target: 2, duration: '15m'},
-          {target: 2, duration: '3h'},
-          {target: 25, duration: '15m'},
-          {target: 2, duration: '15m'},
-          {target: 2, duration: '3h'},
-          {target: 25, duration: '15m'},
-          {target: 2, duration: '15m'},
-          {target: 2, duration: '2h30m'}
-        ]
+        stages: spiky_stages
       }
     }
   }

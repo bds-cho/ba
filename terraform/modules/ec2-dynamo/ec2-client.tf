@@ -10,7 +10,7 @@ resource "aws_instance" "ec2-client" {
     apt update
     apt install -y git && snap install aws-cli --classic && export PATH=$PATH:/snap/bin
     git clone https://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@github.com/bds-cho/ba.git
-    mkdir /root/k6 && cp /ba/k6-workspace/{k6,ec2-dynamodb.js} /root/k6/ && rm -R /ba
+    mkdir /root/k6 && cp /ba/k6-workspace/{k6,ec2-dynamodb.js,util.js} /root/k6/ && rm -R /ba
     #cd /root/k6 && ./k6 run --log-format=json --log-output=file=./ec2-dynamo-<constant/spike>-$(date +%s)-runX.log -e LOAD=<constant/spiky> ./ec2-dynamodb.js
     #aws s3 cp /root/k6/ s3://ba-bench-data --recursive --exclude "*" --include "*.log"
   EOL

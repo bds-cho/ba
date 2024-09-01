@@ -1,6 +1,6 @@
 import exec from 'k6/execution';
 import http from 'k6/http';
-import {spiky_stages, spiky_stages_s3} from './util.js';
+import {spiky_stages_s3} from './util.js';
 
 var config = {};
 if (__ENV.LOAD == "constant") {

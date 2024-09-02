@@ -1,6 +1,6 @@
 import exec from 'k6/execution';
 import sql from 'k6/x/sql';
-import { spiky_stages } from './util,js';
+import { spiky_stages } from './util.js';
 
 var config = {};
 if (__ENV.LOAD == "constant") {

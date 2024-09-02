@@ -4,6 +4,7 @@ resource "aws_instance" "ec2-client" {
   tags              = { Name = "ec2-client" }
   availability_zone = "eu-central-1a"
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
+  depends_on = [ aws_db_instance.rds ]
 
   user_data = <<-EOL
     #!/bin/bash -xe

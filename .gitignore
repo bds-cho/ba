@@ -38,3 +38,8 @@ terraform.rc
 
 # Ignore Backup files
 *.bak
+
+# Ignore python packages and cache
+data/__pycache__/*
+data/.ipynb_checkpoints/*
+data/.env/*

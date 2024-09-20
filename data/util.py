@@ -1,3 +1,7 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import json
+
 def to_df_ec2(path):
     with open(path, 'r') as file:
         lines = file.readlines()
@@ -53,3 +57,25 @@ def plot(df, time_column, latency_column):
     plt.xticks([])  # Hides the specific timestamp labels
     plt.tight_layout()
     plt.show()    
+
+def trim_df(df):
+    lower_bound = int(len(df) * 0.025)  # Calculate 2.5% index
+    upper_bound = int(len(df) * 0.975)  # Calculate 97.5% index
+    return df.iloc[lower_bound:upper_bound]  # Slice the DataFrame
+
+def summary(df, column_name):
+    column = df[column_name]
+    mean = column.mean()
+    max_value = column.max()
+    min_value = column.min()
+    std_dev = column.std()
+    variance = column.var()
+    quantiles = column.quantile([0.25, 0.5, 0.75])  # 25th, 50th (median), and 75th percentiles
+    print(f"----------> Summary of column '{column_name}' <----------")
+    print(f"Mean: {mean}")
+    print(f"Max: {max_value}")
+    print(f"Min: {min_value}")
+    print(f"Standard Deviation: {std_dev}")
+    print(f"Variance: {variance}")
+    print("Quantiles:")
+    print(quantiles)

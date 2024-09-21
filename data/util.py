@@ -48,15 +48,61 @@ def to_df_lambda(path):
     
     return pd.DataFrame(parsed_data)
 
-def plot(df, time_column, latency_column):
+def plot(df):
+    if 'status' in df.columns:
+        df = df.drop(columns=['req_id','start','end','status'])
+    else:
+        df = df.drop(columns=['req_id','start','end'])
+    df['time'] = pd.to_datetime(df['time'])
+    df['latency'] = pd.to_numeric(df['latency'], errors='coerce')
+    df.set_index('time', inplace=True)
+    df = df.resample('5min').mean() # Resampling = 1min
+    
     plt.figure(figsize=(10, 6))
-    plt.plot(df[time_column], df[latency_column], linestyle='-', marker=None)
+    plt.plot(df.index, df['latency'], linestyle='-', marker=None)
     plt.xlabel('Time')
     plt.ylabel('Latency (ms)')
     plt.title('Latency over Time')
     plt.xticks([])  # Hides the specific timestamp labels
     plt.tight_layout()
-    plt.show()    
+    plt.show()
+
+def plot_multiple(dfs, labels):
+    # Preprocess each DataFrame
+    for i, df in enumerate(dfs):
+        # Drop unnecessary columns
+        if 'status' in df.columns:
+            df = df.drop(columns=['req_id', 'start', 'end', 'status'])
+        else:
+            df = df.drop(columns=['req_id', 'start', 'end'])
+
+        # Convert 'time' to datetime and 'latency' to numeric
+        df['time'] = pd.to_datetime(df['time'],utc=True)
+        df['latency'] = pd.to_numeric(df['latency'], errors='coerce')
+
+        # Modify timestamps to start from zero
+        min_time = df['time'].min()
+        df['slided_time'] = (df['time'] - min_time).dt.total_seconds()
+        
+        # Set 'time' as the index and resample
+        df.set_index('time', inplace=True)
+        dfs[i] = df.resample('5min').mean()  # Adjust resampling frequency if needed
+
+    # Plotting
+    plt.figure(figsize=(12, 6))
+
+    for df, label in zip(dfs, labels):
+        # Plot the reindexed DataFrame
+        plt.plot(df['slided_time'], df['latency'], label=label)
+
+    plt.xlabel('Time')
+    plt.ylabel('Latency (ms)')
+    plt.title('Latency over Time')
+    plt.xticks([])  # Rotate the timestamp labels for better readability
+    plt.legend()  # Add a legend to distinguish DataFrames
+    plt.tight_layout()
+    plt.grid()
+    plt.show()
 
 def trim_df(df):
     lower_bound = int(len(df) * 0.025)  # Calculate 2.5% index
@@ -71,7 +117,6 @@ def summary(df, column_name):
     std_dev = column.std()
     variance = column.var()
     quantiles = column.quantile([0.25, 0.5, 0.75])  # 25th, 50th (median), and 75th percentiles
-    print(f"----------> Summary of column '{column_name}' <----------")
     print(f"Mean: {mean}")
     print(f"Max: {max_value}")
     print(f"Min: {min_value}")

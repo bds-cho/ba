@@ -1,5 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+import seaborn as sns
 import json
 
 def to_df_ec2(path):
@@ -124,3 +126,39 @@ def summary(df, column_name):
     print(f"Variance: {variance}")
     print("Quantiles:")
     print(quantiles)
+
+def remove_outliers(df):
+    three_sigma = 3*df['latency'].std()
+    mean = df['latency'].mean()
+    res_df = df[df['latency'] <= (mean+three_sigma)]
+    stats = {
+        'Metric': ['Min', 'Mean', 'Max'],
+        'Value': [
+            res_df['latency'].min(),
+            res_df['latency'].mean(),
+            res_df['latency'].max()
+        ]
+    }
+    return (res_df,stats)
+
+def final_plot(ec2_stats,lambda_stats):
+    fig, (plot1, plot2) = plt.subplots(1, 2, figsize=(10, 5))
+
+    sns.barplot(x='Metric', y='Value', data=ec2_stats, palette='viridis', ax=plot1)
+    plot1.set_title("EC2")
+    plot1.set_ylabel("Latency (ms)")
+    plot1.set_xlabel("")
+    for bar in range(0,3):
+        plot1.bar_label(plot1.containers[bar], fontsize=10);
+    plot1.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    sns.barplot(x='Metric', y='Value', data=lambda_stats, palette='magma', ax=plot2)
+    plot2.set_title("Lambda")
+    plot2.set_ylabel("Latency (ms)")
+    plot2.set_xlabel("")
+    for bar in range(0,3):
+        plot2.bar_label(plot2.containers[bar], fontsize=10);
+    plot2.yaxis.set_major_locator(MaxNLocator(integer=True))
+    
+    plt.tight_layout()
+    return fig

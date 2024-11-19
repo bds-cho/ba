@@ -1,1 +1,0 @@
-[Thesis](./thesis/thesis.pdf)

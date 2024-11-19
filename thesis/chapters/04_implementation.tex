@@ -1,0 +1,55 @@
+\section{Benchmark Implementation}
+\label{cha:implementation}
+
+\subsection{Resource Configuration}
+\label{sec:config}
+
+\textbf{RDS}:
+A MySQL 8.0 instance on a t3.micro virtual machine (VM) with 1GiB RAM, 2 vCPUs, and 5GB storage. The instance is located in the eu-central-1a availability zone, with multi-AZ failover disabled to maintain a single-zone configuration. It hosts a single database containing a table with 1000 rows and four columns: \textit{id}, \textit{name}, \textit{address}, and \textit{email}.
+
+
+\textbf{DynamoDB}:
+A DynamoDB table configured with \textit{Provisioned} capacity mode, a read capacity of 25 Read Capacity Units (RCUs), and a write capacity of 5 Write Capacity Units (WCUs). The table contains 10 items, each with an \textit{id} (hash key) and an \textit{email} attribute.
+
+\textbf{S3}:
+A single S3 bucket with a 20-byte text file.
+
+\textbf{EC2}:
+An EC2 instance of t2.micro type with 1GiB RAM, and 1vCPU, located in the eu-central-1a availability zone. It is operated by Ubuntu Server 24.04 (64-bit, HVM-based) and is equipped with the k6 and corresponding scripts.
+
+\textbf{Lambda}:
+A none-VPC Node.js 20 function with 1.65GiB RAM, 1 vCPU, and concurrency limit of 990. The configuration of Lambda-Helper is identical to that of EC2.
+
+\subsection{Load Generation and Types}
+\label{sec:loads}
+
+The benchmark evaluates performance under two distinct load patterns: (1) constant load and (2) bursty load. An open workload model was employed, meaning requests per second (RPS) is configured rather than the number of client threads. Both compute services were tested using identical benchmarking scripts to ensure consistency in test duration and load configuration.
+
+\textbf{Constant Load}: For the constant load scenario, the objective is to simulate a stable, continuous load over an extended period to observe baseline latency behavior for each datastore. The configurations is as follows:
+\begin{itemize}
+	\item \textbf{RDS and DynamoDB}: 2 RPS for 14 hours.
+	\item \textbf{S3}: 0.2 RPS (1 read every 5 seconds) for 3 hours.
+\end{itemize}
+
+\textbf{Bursty Load}: For the bursty load scenario, the benchmark incorporated multiple spikes to simulate unpredictable load surges. The configuration were as following:
+\begin{itemize}
+	\item \textbf{RDS and DynamoDB}: The session starts with a baseline rate of 2 RPS for the first 2 hours, followed by 30 load spikes. Each spike lasts 3 minutes, with RPS increasing linearly to 20 RPS and then decreasing back to the baseline of 2 RPS. Between spikes, the load remains at the baseline rate for 3 minutes. The session concludes with an additional 2 hours at the 2 RPS baseline load, resulting in a total test duration of approximately 7 hours.
+	\item \textbf{S3}: The sessions starts with a baseline rate of 0.2 RPS for the first 20 minutes, followed by 6 load spikes. Each spike lasts 30 seconds, with RPS increasing linearly to 16 RPS and then decreasing back to the baseline of 0.2 RPS. Between spikes, the load remains at the baseline rate for 6 minutes. The session concludes with an additional 15 minutes at the 0.2 RPS baseline load, resulting in a total test duration of approximately 70 minutes.
+\end{itemize}
+
+This configuration allowed us to reach the monthly limits of the AWS Free Tier while keeping a small buffer. As noted, the monthly limits for S3 are low (20,000 GET requests per month), which resulted in short sessions for S3.
+
+\subsection{Data Analysis}
+\label{sec:analysis}
+
+As discussed, for each targeted datastore service, we compare the latency performance of EC2 and Lambda. Averages alone are insufficient to fully capture the performance distribution, therefore, we present aggregate in bar plots and additionally time-series graphs for comprehensive view.
+
+Prior to analysis, we remove 2.5\% of data from the start and end of the datasets to remove effects of warm-up and shut-down behavior. Additionally, outliers are identified and removed.
+
+Outlier detection was performed using the 3-sigma rule for univariate data, a method commonly used for statistical outlier identification based on the principle that values lying beyond three standard deviations from the mean are considered outliers. This approach is outlined in \cite{} and ensures that extreme values do not skew the analysis.
+
+For visualizing aggregates in bar plots, we concatenate the two sessions for each pair and mode. For visualizing time-series data we use resampling.
+
+The analysis was conducted using Python Jupyter Notebook with the pandas, matplotlib, and seaborn libraries.
+
+

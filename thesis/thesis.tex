@@ -1,0 +1,111 @@
+% This thesis template is based on the personal template of Felix Moebius. Thanks, Felix!
+% It has been extended and modified by Tobias Pfandzelter at the Scalable Software Systems group of TU Berlin.
+% It is licensed under the terms of the MIT license, meaning you are free to use it however you see fit but we accept no liability.
+% Good luck writing your thesis!
+
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fix-cm}
+
+\usepackage[a4paper, margin=3cm]{geometry}
+\usepackage[titletoc, title]{appendix}
+
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage[all]{nowidow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{acronym}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{titlesec}
+\usepackage{csquotes}
+
+\usepackage{transparent}
+\usepackage{eso-pic}
+\usepackage[section]{placeins}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{subcaption}
+
+\renewcommand\thefigure{%
+\thesection.\arabic{figure}}
+\renewcommand\thesubfigure{%
+\thesection.\arabic{figure}.\arabic{subfigure}}
+\renewcommand\thetable{%
+\thesection.\arabic{table}}
+
+\usepackage[main=english, ngerman]{babel}
+
+% we use the cleveref package to refer to figures, sections, etc.
+% instead of "Figure~\ref{fig:example}", write only "\cref{fig:example}" and the word "Figure" (or table, etc) will be inserted normally
+\usepackage[noabbrev,capitalise]{cleveref}
+
+\usepackage[
+    maxbibnames=99,
+    style=alphabetic,
+    url=false,
+    backend=bibtex8,
+    sortcites=true,
+]{biblatex}
+\addbibresource{refs.bib}
+\DeclareFieldFormat[online]{urldate}{Last accessed: #1}
+\DeclareFieldFormat{eprint}{arXiv: \href{https://arxiv.org/abs/#1}{#1}}
+\DeclareFieldFormat[report]{title}{``#1''}
+
+
+\newcommand{\projectTitle}{Exploring Datastore Access Latency across AWS Compute Services}
+\newcommand{\thesisType}{Bachelor's Thesis}
+\newcommand{\authors}{Bhupendra Singh}
+\newcommand{\matrikel}{464877}
+\newcommand{\authorEmail}{\href{mailto:b.singh@campus.tu-berlin.de}{b.singh@campus.tu-berlin.de}}
+\newcommand{\examinera}{Prof.~Dr.-Ing.~David Bermbach}
+\newcommand{\examinerb}{Prof.~Dr.~habil.~Odej Kao}
+\newcommand{\supervisor}{Trever Schirmer}
+
+\newcommand{\projectYear}{2024}
+\newcommand{\facultyName}{Fakultät Elektrotechnik und Informatik}
+\newcommand{\departmentName}{Fachgebiet Scalable Software Systems}
+
+\begin{document}
+\input{front.tex}
+
+\newpage
+
+\section*{Abstract}
+
+TODO
+
+% GERMAN
+\clearpage
+\begin{otherlanguage}
+    {ngerman}
+    \section*{Kurzfassung}
+    TODO
+\end{otherlanguage}
+
+\clearpage
+
+\tableofcontents
+
+\include{chapters/01_introduction.tex}
+\clearpage
+\include{chapters/02_background.tex}
+\clearpage
+\include{chapters/03_approach.tex}
+\clearpage
+\include{chapters/04_implementation.tex}
+\clearpage
+\include{chapters/05_results.tex}
+\clearpage
+\include{chapters/06_discussion.tex}
+\clearpage
+\include{chapters/07_relatedwork.tex}
+\clearpage
+\include{chapters/08_conclusion.tex}
+
+%\newpage
+%\printbibliography
+\end{document}

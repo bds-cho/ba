@@ -69,6 +69,8 @@ def plot(df):
     plt.tight_layout()
     plt.show()
 
+import matplotlib.pyplot as plt
+
 def plot_multiple(dfs, labels):
     # Preprocess each DataFrame
     for i, df in enumerate(dfs):
@@ -79,32 +81,32 @@ def plot_multiple(dfs, labels):
             df = df.drop(columns=['req_id', 'start', 'end'])
 
         # Convert 'time' to datetime and 'latency' to numeric
-        df['time'] = pd.to_datetime(df['time'],utc=True)
+        df['time'] = pd.to_datetime(df['time'], utc=True)
         df['latency'] = pd.to_numeric(df['latency'], errors='coerce')
 
         # Modify timestamps to start from zero
         min_time = df['time'].min()
         df['slided_time'] = (df['time'] - min_time).dt.total_seconds()
-        
+
         # Set 'time' as the index and resample
         df.set_index('time', inplace=True)
-        dfs[i] = df.resample('5min').mean()  # Adjust resampling frequency if needed
+        dfs[i] = df.resample('10min').mean()  # Adjust resampling frequency if needed
 
-    # Plotting
-    plt.figure(figsize=(12, 6))
+    # Create the figure
+    fig, ax = plt.subplots(figsize=(12, 6))
 
+    # Plot each DataFrame
     for df, label in zip(dfs, labels):
-        # Plot the reindexed DataFrame
-        plt.plot(df['slided_time'], df['latency'], label=label)
+        ax.plot(df['slided_time'], df['latency'], label=label)
 
-    plt.xlabel('Time')
-    plt.ylabel('Latency (ms)')
-    plt.title('Latency over Time')
-    plt.xticks([])  # Rotate the timestamp labels for better readability
-    plt.legend()  # Add a legend to distinguish DataFrames
+    # Add labels, legend, and grid
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Latency (ms)')
+    ax.legend(loc='upper left')
     plt.tight_layout()
-    plt.grid()
-    plt.show()
+
+    # Return the figure
+    return fig
 
 def trim_df(df):
     lower_bound = int(len(df) * 0.025)  # Calculate 2.5% index
@@ -141,7 +143,7 @@ def remove_outliers(df):
     }
     return (res_df,stats)
 
-def final_plot(ec2_stats,lambda_stats):
+def final_plot(ec2_df,ec2_stats,lambda_df,lambda_stats):
     fig, (plot1, plot2) = plt.subplots(1, 2, figsize=(10, 5))
 
     sns.barplot(x='Metric', y='Value', data=ec2_stats, palette='viridis', ax=plot1)
@@ -151,6 +153,9 @@ def final_plot(ec2_stats,lambda_stats):
     for bar in range(0,3):
         plot1.bar_label(plot1.containers[bar], fontsize=10);
     plot1.yaxis.set_major_locator(MaxNLocator(integer=True))
+    var1 = round(ec2_df['latency'].var(),4)
+    std1 = round(ec2_df['latency'].std(),4)
+    plot1.legend(loc='upper left', title=f"Std Dev: {var1}\nVariance: {std1}")
 
     sns.barplot(x='Metric', y='Value', data=lambda_stats, palette='magma', ax=plot2)
     plot2.set_title("Lambda")
@@ -159,6 +164,9 @@ def final_plot(ec2_stats,lambda_stats):
     for bar in range(0,3):
         plot2.bar_label(plot2.containers[bar], fontsize=10);
     plot2.yaxis.set_major_locator(MaxNLocator(integer=True))
+    var2 = round(lambda_df['latency'].var(),4)
+    std2 = round(lambda_df['latency'].std(),4)
+    plot2.legend(loc='upper left', title=f"Std Dev: {var2}\nVariance: {std2}")
     
     plt.tight_layout()
     return fig

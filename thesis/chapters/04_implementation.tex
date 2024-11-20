@@ -1,6 +1,8 @@
 \section{Benchmark Implementation}
 \label{cha:implementation}
 
+This section describes the implementation of the benchmark design used to evaluate access latency. It provides detailed information on three key aspects: (1) the configuration of service instances, (2) the methods for load generation and workload types, and (3) the approach to data analysis.
+
 \subsection{Resource Configuration}
 \label{sec:config}
 
@@ -18,38 +20,37 @@ A single S3 bucket with a 20-byte text file.
 An EC2 instance of t2.micro type with 1GiB RAM, and 1vCPU, located in the eu-central-1a availability zone. It is operated by Ubuntu Server 24.04 (64-bit, HVM-based) and is equipped with the k6 and corresponding scripts.
 
 \textbf{Lambda}:
-A none-VPC Node.js 20 function with 1.65GiB RAM, 1 vCPU, and concurrency limit of 990. The configuration of Lambda-Helper is identical to that of EC2.
+A non-VPC Node.js 20 function with 1.65GiB RAM, 1 vCPU, and a concurrency limit set to 990. The configuration of Lambda-Helper is identical to that of EC2.
 
 \subsection{Load Generation and Types}
 \label{sec:loads}
 
-The benchmark evaluates performance under two distinct load patterns: (1) constant load and (2) bursty load. An open workload model was employed, meaning requests per second (RPS) is configured rather than the number of client threads. Both compute services were tested using identical benchmarking scripts to ensure consistency in test duration and load configuration.
+The benchmark evaluates performance under two distinct workload types: (1) constant workload and (2) burst workload. An open workload model was employed, meaning requests per second (RPS) are configured rather than the number of client threads. Both compute services were tested using identical benchmarking scripts to ensure consistency in test duration and load configuration.
 
-\textbf{Constant Load}: For the constant load scenario, the objective is to simulate a stable, continuous load over an extended period to observe baseline latency behavior for each datastore. The configurations is as follows:
+\textbf{Constant Workload}: For the constant workload scenario, the objective is to simulate a stable, continuous load over an extended period to observe baseline latency behavior for each datastore. The configurations are as follows:
 \begin{itemize}
 	\item \textbf{RDS and DynamoDB}: 2 RPS for 14 hours.
 	\item \textbf{S3}: 0.2 RPS (1 read every 5 seconds) for 3 hours.
 \end{itemize}
 
-\textbf{Bursty Load}: For the bursty load scenario, the benchmark incorporated multiple spikes to simulate unpredictable load surges. The configuration were as following:
+\textbf{Burst Workload}: For the burst workload scenario, the benchmark incorporated multiple spikes to simulate unpredictable load surges. The configurations are as follows:
 \begin{itemize}
-	\item \textbf{RDS and DynamoDB}: The session starts with a baseline rate of 2 RPS for the first 2 hours, followed by 30 load spikes. Each spike lasts 3 minutes, with RPS increasing linearly to 20 RPS and then decreasing back to the baseline of 2 RPS. Between spikes, the load remains at the baseline rate for 3 minutes. The session concludes with an additional 2 hours at the 2 RPS baseline load, resulting in a total test duration of approximately 7 hours.
-	\item \textbf{S3}: The sessions starts with a baseline rate of 0.2 RPS for the first 20 minutes, followed by 6 load spikes. Each spike lasts 30 seconds, with RPS increasing linearly to 16 RPS and then decreasing back to the baseline of 0.2 RPS. Between spikes, the load remains at the baseline rate for 6 minutes. The session concludes with an additional 15 minutes at the 0.2 RPS baseline load, resulting in a total test duration of approximately 70 minutes.
+	\item \textbf{RDS and DynamoDB}: The run starts with a baseline rate of 2 RPS for the first 2 hours, followed by 30 load spikes. Each spike lasts 3 minutes, with RPS increasing linearly to 20 RPS and then decreasing back to the baseline of 2 RPS. Between spikes, the load remains at the baseline rate for 3 minutes. The run concludes with an additional 2 hours at the 2 RPS baseline load, resulting in a total test duration of approximately 7 hours.
+	\item \textbf{S3}: The run starts with a baseline rate of 0.2 RPS for the first 20 minutes, followed by 6 load spikes. Each spike lasts 30 seconds, with RPS increasing linearly to 16 RPS and then decreasing back to the baseline of 0.2 RPS. Between spikes, the load remains at the baseline rate for 6 minutes. The run concludes with an additional 15 minutes at the 0.2 RPS baseline load, resulting in a total test duration of approximately 70 minutes.
 \end{itemize}
 
-This configuration allowed us to reach the monthly limits of the AWS Free Tier while keeping a small buffer. As noted, the monthly limits for S3 are low (20,000 GET requests per month), which resulted in short sessions for S3.
+This configuration allowed us to reach the monthly limits of the AWS Free Tier while keeping a small buffer. As noted, the monthly limits for S3 are relatively low, namely 20000 GET requests per month, which resulted in short-running benchmarking runs for S3.
 
 \subsection{Data Analysis}
 \label{sec:analysis}
 
-As discussed, for each targeted datastore service, we compare the latency performance of EC2 and Lambda. Averages alone are insufficient to fully capture the performance distribution, therefore, we present aggregate in bar plots and additionally time-series graphs for comprehensive view.
+As discussed, for each targeted datastore service, we compare the latency performance across EC2 and Lambda. Since averages alone cannot fully represent the data distribution, we provide both bar plots for aggregated metrics and time-series graphs for a detailed view.
 
-Prior to analysis, we remove 2.5\% of data from the start and end of the datasets to remove effects of warm-up and shut-down behavior. Additionally, outliers are identified and removed.
+To ensure data integrity before analysis, two preprocessing steps are applied. First, we exclude the initial and final 2.5\% of data points to remove the effects of warm-up and shut-down behavior. Second, outliers are identified and removed using the 3-sigma rule, which considers data points beyond three standard deviations from the mean as outliers. This statistical approach, outlined in \cite{}, prevents extreme values from skewing the results.
 
-Outlier detection was performed using the 3-sigma rule for univariate data, a method commonly used for statistical outlier identification based on the principle that values lying beyond three standard deviations from the mean are considered outliers. This approach is outlined in \cite{} and ensures that extreme values do not skew the analysis.
+Bar plots visualizing aggregates are constructed by concatenating data from two runs for each pair and workload type. For time-series visualizations, resampling is applied to enhance clarity.
 
-For visualizing aggregates in bar plots, we concatenate the two sessions for each pair and mode. For visualizing time-series data we use resampling.
+Data analysis and visualization are conducted using Python's Jupyter Notebook with pandas, matplotlib, and seaborn libraries.
 
-The analysis was conducted using Python Jupyter Notebook with the pandas, matplotlib, and seaborn libraries.
 
 

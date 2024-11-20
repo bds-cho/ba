@@ -2,32 +2,18 @@
 \label{cha:intro}
 
 % BACKGROUND AND MOTIVATION
-With the rapid expansion of cloud computing, organizations increasingly rely on cloud providers like Amazon Web Services (AWS) for scalable and flexible infrastructure solutions. Key AWS services, such as EC2, Lambda, DynamoDB, RDS, and S3, support diverse applications across industries, from real-time data processing to large-scale data storage. For cloud-based systems, latency between services is critical; it directly affects application responsiveness, user experience, and operational costs, particularly in latency-sensitive applications like financial services, e-commerce, and gaming.
-
-AWS provides numerous configurations and tools for optimizing service interactions, yet the specific latency characteristics between services can vary depending on network setup, service proximity (e.g., Availability Zones), caching strategies, and service-specific characteristics (e.g., the underlying storage mechanisms in S3 vs. RDS). As organizations seek efficient and performant cloud architectures, understanding the latency dynamics of these services is essential for making informed architectural decisions.
+Cloud computing delivers on-demand resources like servers, storage, and databases via the Internet, eliminating the need for physical infrastructure and enabling flexibility and scalability. Its adoption has surged in the past decade due to the emergence of data-intensive applications and improved connectivity \cite{}. AWS, a leader in cloud computing, pioneered various cloud models and controls over 30\% of the global market as of 2023, driven by its innovation and broad service portfolio \cite{}.
 
 % PROBLEM STATEMENT
-Despite AWS’s built-in optimizations, there is limited publicly available, empirical data on the exact latency characteristics between compute and data services, especially across different compute paradigms like EC2 and Lambda. EC2 provides traditional virtual machine-based computing, while Lambda represents serverless, event-driven computing. The latency between these compute options and data storage solutions—specifically DynamoDB, RDS, and S3—affects application performance and scalability but is not thoroughly documented in AWS’s standard benchmarks.
+Applications in cloud environments typically consist of compute and datastore service instances that interact frequently. For example, AWS Elastic Compute Cloud (EC2) is often used for backend processing, while AWS Relational Database Service (RDS) handles structured data storage. Communication between these services is a critical aspect of cloud application architecture, and network latencies significantly influence overall performance and user experience, particularly in latency-sensitive applications such as e-commerce, real-time analytics, and gaming \cite{}.
 
-This study aims to bridge this knowledge gap by providing detailed benchmarking results on access latency between EC2-Lambda and three AWS data services: DynamoDB, RDS, and S3. The study includes configurations such as VPC settings and instance specifications, which influence latency outcomes.
+AWS offers latency insights for datastore services from both service-side and client-side perspectives. However, it remains unclear how client-side latency varies across different AWS compute services. For instance, does the EC2-RDS pair perform differently compared to Lambda-RDS? AWS provides numerous configurations and tools for optimizing service interactions, yet the specific latency characteristics between services can vary depending on network setup, service proximity, caching strategies, and service-specific characteristics. As organizations seek efficient and performant cloud architectures, understanding the latency dynamics between these services is essential for making informed architectural decisions.
 
-% OBJECTIVE
-The main objectives of this thesis is to conduct benchmarking, measuring and comparing access latency between EC2 instances and Lambda functions interacting with DynamoDB, RDS, and S3 under controlled configurations.
-
-% SCOPE & LIMITATIONS
-This thesis focuses on access latency benchmarks within the AWS EU-Central-1 (Frankfurt) region to maintain a controlled environment. While benchmarking different configurations within AWS, the results may not be universally applicable across other cloud providers or AWS regions. Additionally, the focus remains on synchronous interactions between services, excluding asynchronous and multi-region setups.
-
-A primary limitation of this thesis lies in the requirement to design and execute the entire benchmarking process within the constraints of the AWS Free Tier. This imposed restrictions on the selection of components, the duration of the benchmarking activities, and the number of repetitions conducted.
-
-The benchmarks were conducted with tools such as k6 and JavaScript, with latency metrics recorded and analyzed using Python’s data analysis libraries. These choices align with industry-standard benchmarking practices but may introduce minor tool-based variances that are acknowledged and accounted for in the analysis.
+Despite the critical role of latency in cloud-based systems, publicly available empirical data on latency characteristics between AWS compute and datastore services remains limited. This thesis aims to fill this knowledge gap by providing an initial benchmark for access latency metrics between key AWS compute and datastore service pairs, specifically EC2, and Lambda paired with RDS, DynamoDB, and Simple Storage Service (S3).
 
 % THESIS STRUCTURE
-The remainder of this thesis is structured as follows:
+We therefore make the following contributions in this thesis:
 \begin{enumerate}
-	\item Section II Background
-	\item Section III Approach
-	\item Section IV Evaluation
-	\item Section V Discussion
-	\item Section VI Related Work
-	\item Section VII Conclusion
+	\item We address the identified knowledge gap by proposing a benchmark design, detailed in \cref{cha:approach}.
+	\item We evaluate the proposed approach through experimentation on AWS compute and datastore service pairs, with implementation and results presented in \cref{cha:implementation,cha:results}.
 \end{enumerate}

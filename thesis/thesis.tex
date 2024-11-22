@@ -75,15 +75,26 @@
 \newpage
 
 \section*{Abstract}
-
---> TODO <--
+Cloud computing has grown rapidly, driving the demand for scalable and flexible infrastructure solutions. Amazon Web Services (AWS) leads the market, offering diverse compute and datastore services for various applications. Despite their importance, empirical data on latency dynamics between AWS compute and datastore services remains scarce.
+%
+This thesis addresses this knowledge gap by systematically benchmarking access latency between EC2 and Lambda paired with RDS, DynamoDB, and S3. We evaluate these service pairs under constant and burst workloads. The results show that EC2 pairs consistently achieve lower mean latency than Lambda pairs.
+%
+This study acknowledges certain limitations, including constraints imposed by AWS Free Tier, the focus on a single region, and the exclusion of mixed workload scenarios.
+%
+This work provides foundational insights for designing latency-sensitive cloud applications. It emphasizes the need for further research on multi-region setups, advanced configurations, and mixed workload scenarios to deepen the understanding of AWS service interactions.
 
 % GERMAN
 \clearpage
 \begin{otherlanguage}
     {ngerman}
     \section*{Kurzfassung}
-    --> TODO <--
+    Cloud Computing hat sich schnell entwickelt und führt zu einer steigenden Nachfrage nach skalierbaren und flexiblen Infrastruktur-Lösungen. Amazon Web Services (AWS) führt den Markt an und bietet eine Vielzahl von Compute- und Datenspeicher-Diensten für unterschiedlichste Anwendungen. Trotz ihrer Bedeutung fehlen jedoch empirische Daten zu den Latenz-Dynamiken zwischen den Compute- und Datenspeicher-Diensten von AWS.
+    %
+    Diese Arbeit schließt diese Wissenslücke, indem sie die Zugriffs-Latenz zwischen EC2 und Lambda in Kombination mit RDS, DynamoDB und S3 systematisch benchmarkt. Diese Dienst-Paare werden unter konstanten und burstigen Arbeitslasten evaluiert. Die Ergebnisse zeigen, dass EC2-Paare durchgehend eine niedrigere durchschnittliche Latenz aufweisen als Lambda-Paare.
+    %
+    Die Arbeit erkennt bestimmte Einschränkungen an, darunter die Begrenzungen durch das AWS Free Tier, die Fokussierung auf eine einzelne Region und die Ausschließung gemischter Arbeitslastszenarien.
+    %
+    Diese Arbeit liefert grundlegende Erkenntnisse für das Design latenzempfindlicher Cloud-Anwendungen und betont die Notwendigkeit weiterer Forschung zu Multi-Region-Setups, erweiterten Konfigurationen und gemischten Arbeitslastszenarien, um das Verständnis der Interaktionen zwischen AWS-Diensten zu vertiefen.
 \end{otherlanguage}
 
 \clearpage
@@ -106,6 +117,6 @@
 \clearpage
 \include{chapters/08_conclusion.tex}
 
-%\newpage
-%\printbibliography
+\newpage
+\printbibliography
 \end{document}

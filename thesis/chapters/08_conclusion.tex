@@ -1,4 +1,11 @@
 \section{Conclusion}
 \label{cha:conclusion}
 
---> TODO <--
+Cloud computing has experienced rapid growth, becoming integral to industries seeking scalable and flexible solutions. AWS has emerged as a leader, offering diverse services for computing and storage. Despite its significance, limited empirical data exists on the latency characteristics of AWS compute-datastore interactions, necessitating this study to bridge the knowledge gap.
+
+This thesis investigated the latency performance between AWS compute and datastore service pairs, specifically EC2 and Lambda paired with RDS, DynamoDB, and S3. A systematically conducted benchmark evaluated each pair under constant and burst workloads. Results indicated that EC2 pairs consistently demonstrated lower latency compared to Lambda pairs.
+
+The study highlighted the influence of computing service choices on latency performance and provided empirical data to support architectural decisions in cloud environments. Despite limitations, such as the constraints of AWS Free Tier and the exclusion of mixed workload scenarios, the findings offer foundational insights into the dynamics of service interactions in AWS.
+
+Future work can expand on these results by exploring higher-tier configurations, multi-region setups, and mixed read-write workloads to provide a more comprehensive understanding of cloud service latency characteristics.
+

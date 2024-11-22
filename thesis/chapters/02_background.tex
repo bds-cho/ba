@@ -1,4 +1,17 @@
 \section{Background}
 \label{cha:background}
 
---> TODO <--
+As outlined in \cref{cha:intro}, in this thesis we benchmark access latency between AWS compute and datastore services. Access latency refers to the duration between a client request and its corresponding response, influenced by factors such as network delays, processing overhead, and caching mechanisms. Benchmarking, in this context, involves systematically evaluating and comparing IT components or systems against predefined performance metrics.
+
+In this section, we summarize general requirements and key elements for benchmarking cloud services, drawing on insights from \cite{book_bermbach_cloud_service_benchmarking,paper_cooper_ycsb,paper_folkerts_benchmarking,paper_binnig_weather}. Furthermore, we define relevant tools, terms, and terminologies to provide clarity and context for the following sections.
+
+\subsection{Requirements of Cloud Benchmarking}
+
+Cloud benchmarking generally requires relevance to the problem domain, affordability, and simplicity to ensure usability and trust. Benchmarks must allow fair comparisons, be repeatable under similar conditions, and realistically reflect typical workloads. Configurability and scalability are essential for adapting benchmarks to diverse scenarios while maintaining alignment with real-world applications. Additionally, meaningful metrics are critical for interpreting system performance effectively. However, according to use-case and limitations, tradeoffs between these requirements might be required.
+
+Benchmarks should measure deviations from an ideal case, incorporate failure scenarios, and use meaningful cost metrics. They must account for geo-distribution, stress tests, and scalability under variable loads. Long-running experiments and adaptable configurations ensure relevance as applications evolve.
+
+A major challenge for this thesis is to conduct the benchmarking under limitations of AWS Free Tier\footcite{https://aws.amazon.com/free/}, hence affordability is also a requirement for this thesis. Additional requirements include understandability, portability, 
+
+\subsection{Elements of a Cloud Benchmark}
+define Workload Generator, SUT, k6, AWS services, refer instance with service name

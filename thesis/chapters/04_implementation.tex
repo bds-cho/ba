@@ -48,9 +48,7 @@ As discussed, for each targeted datastore service, we compare the latency perfor
 
 To ensure data integrity before analysis, two preprocessing steps are applied. First, we exclude the initial and final 2.5\% of data points to remove the effects of warm-up and shut-down behavior. Second, outliers are identified and removed using the 3-sigma rule, which considers data points beyond three standard deviations from the mean as outliers. This statistical approach, outlined in \cite{}, prevents extreme values from skewing the results.
 
-Bar plots visualizing aggregates are constructed by concatenating data from two runs for each pair and workload type. For time-series visualizations, resampling is applied to enhance clarity.
-
-Data analysis and visualization are conducted using Python's Jupyter Notebook with pandas, matplotlib, and seaborn libraries.
+Bar plots visualizing aggregates are constructed by concatenating data from two runs for each pair and workload type. For time-series visualizations, resampling is applied to enhance clarity. Data transformation, analysis, and visualization are conducted using Python's Jupyter Notebook with pandas, matplotlib, and seaborn libraries.
 
 
 

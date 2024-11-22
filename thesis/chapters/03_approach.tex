@@ -12,7 +12,7 @@ Each benchmarking run consists of two main components: (1) a pre-loaded datastor
 
 For Lambda-Pairs, each invocation corresponds to a single read operation on the datastore. To invoke the Lambda function in a scripted manner and collect results, an additional EC2 instance, referred to as the "Lambda-Helper", is provisioned with k6 and the necessary scripts, as shown in \ref{}. This instance sends HTTP requests to invoke the Lambda function and collects response data, which includes timestamps recorded by the Lambda function.
 
-The benchmark evaluates each pair under two workload types, with each configuration repeated twice, resulting in of 24 runs. We use infrastructure-as-code and shell scripting for resource provisioning and de-provisioning in AWS, ensuring a high level of automation to minimize human error. All runs are executed in the same AWS region.
+The benchmark evaluates each pair under two workload types, with each configuration repeated twice, resulting in of 24 runs. We use infrastructure-as-code and shell scripting for resource provisioning and de-provisioning in AWS, ensuring a high level of automation to minimize human error. All runs are executed in AWS region \textit{eu-central-1}.
 
 After each run is successfully completed, data is exported to a dedicated S3 bucket for collection. Finally, we transform the collected data and perform analysis to gain insights.
 

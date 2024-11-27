@@ -90,7 +90,7 @@ def plot_multiple(dfs, labels):
 
         # Set 'time' as the index and resample
         df.set_index('time', inplace=True)
-        dfs[i] = df.resample('10min').mean()  # Adjust resampling frequency if needed
+        dfs[i] = df.resample('7min').mean()  # Adjust resampling frequency if needed
 
     # Create the figure
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -102,7 +102,9 @@ def plot_multiple(dfs, labels):
     # Add labels, legend, and grid
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Latency (ms)')
-    ax.legend(loc='upper left')
+    ax.legend(loc='lower right')
+    ax.set_ylim(bottom=0)
+    ax.grid(True, axis='y')
     plt.tight_layout()
 
     # Return the figure
@@ -138,6 +140,21 @@ def remove_outliers(df):
         'Value': [
             res_df['latency'].min(),
             res_df['latency'].mean(),
+            res_df['latency'].max()
+        ]
+    }
+    return (res_df,stats)
+
+def outliers(df):
+    three_sigma = 3*df['latency'].std()
+    mean = df['latency'].mean()
+    res_df = df[df['latency'] > (mean+three_sigma)]
+    stats = {
+        'Metric': ['Min', 'Mean', 'Frequency', 'Max'],
+        'Value': [
+            res_df['latency'].min(),
+            res_df['latency'].mean(),
+            len(res_df['latency']),
             res_df['latency'].max()
         ]
     }

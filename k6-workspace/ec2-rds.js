@@ -55,9 +55,9 @@ export default function () {
   const req_id = parseFloat(exec.vu.idInTest + '.' + exec.vu.iterationInInstance);
   const query = "SELECT * FROM users WHERE users.id = 500;";
   
-  const start = performance.now();
+  const start = Date.now();
   const result = sql.query(db,query);
-  const end = performance.now();
-  
+  const end = Date.now();
+  perfr
   console.log(req_id+'##'+start+'##'+JSON.stringify(toString(result))+'##'+end);
 }

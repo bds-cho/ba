@@ -26,7 +26,7 @@ A single S3 bucket with a 20-byte text file.
 An EC2 instance of t2.micro type with 1GiB RAM, and 1vCPU, located in the eu-central-1a availability zone. It is operated by Ubuntu Server 24.04 (HVM-based) and is equipped with the k6 and corresponding test scripts.
 
 \textbf{Lambda}:
-A non-VPC Node.js 20 function with 1.65GiB RAM, 1vCPU, and a concurrency limit set to 990. The configuration of Lambda-Helper is identical to that of EC2.
+A non-VPC Node.js 20 function with 1.65GiB RAM, 1vCPU, and reserved concurrency set to 990. The configuration of Lambda-Helper is identical to that of EC2.
 
 \subsection{Workload Generation}
 \label{sec:loads}

@@ -10,7 +10,7 @@ Applications in cloud environments typically consist of compute and datastore se
 % THESIS CONTRIBUTION
 Prominent AWS compute services include (1) Elastic Cloud Compute (EC2), offers customizable virtual machines for consistent performance and long-running workloads, and (2) Lambda, a serverless, event-driven service ideal for short tasks and automatic scaling. Key datastore services are (1) Relational Database Service (RDS), provides managed SQL databases for structured data, (2) DynamoDB, a serverless NoSQL database for high-scale, low-latency use cases, and (3) Simple Storage Service (S3), a distributed object storage service for unstructured data \cite{}.
 
-In this thesis, we benchmark access latency between pairs of the above AWS compute and datastore services to examine how the choice of compute service affects latency dynamics with datastores, such as whether an EC2-RDS pair outperforms a Lambda-RDS pair. The results consistently show that EC2-based pairs outperform Lambda-based pairs by small margins. These findings can guide cloud and application developers in making informed deployment decisions, especially for latency-sensitive applications.
+In this thesis, we benchmark access latency between the above AWS compute and datastore services to examine how the choice of compute service affects latency dynamics with datastores, such as whether an EC2-RDS pair outperforms a Lambda-RDS pair. The results consistently show that EC2-based pairs outperform Lambda-based pairs by small margins. These findings can guide cloud and application developers in making informed deployment decisions, especially for latency-sensitive applications.
 
 
 We therefore make the following contributions in this thesis:

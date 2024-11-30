@@ -1,29 +1,47 @@
 \section{Background}
 \label{cha:background}
 
-As outlined in \cref{cha:intro}, in this thesis we benchmark access latency between AWS compute and datastore services. Access latency refers to the duration between a client request and its corresponding response, influenced by factors such as network delays, processing overhead, and caching mechanisms. Benchmarking, in this context, involves systematically evaluating and comparing IT components or systems against predefined performance metrics.
+Access latency generally means time it takes for data to reach from one point to another, also commonly referred as latency or Round-Trip Time (RTT). In the context of this thesis, it specifically refers to the time a compute service instance requires to obtain a response from datastore. It is a well known fact, that even small amounts of delay, even on microseconds scale, may lead to negative impact on the performance of an application \cite{}, which implies the importance of latency.
+%
+From a cloud user's perspective, latency between cloud services can be influenced by certain controllable factors, such as service configuration, choice of region and availability zone, the proximity of resources, selecting instance types or service tiers optimized for low latency, network configuration, caching strategies, and application code optimization. However, underlying cloud infrastructure, especially network conditions remain uncontrollable.
 
-In this section, we summarize general requirements and key elements for benchmarking cloud services, drawing on insights from \cite{book_bermbach_cloud_service_benchmarking,paper_cooper_ycsb,paper_folkerts_benchmarking,paper_binnig_weather}. Furthermore, we discuss challenges and provide context for the following sections.
+Benchmarking carries different definitions across domains, however in this thesis, it specifically refers to systematically evaluating and comparing access latency between AWS compute and datastore services. Cloud benchmarking is a well-researched field, and the following subsections summarize the key elements and requirements of cloud benchmarking, drawing from existing literature \cite{book_bermbach_cloud_service_benchmarking,paper_cooper_ycsb,paper_folkerts_benchmarking,paper_binnig_weather}. Additionally, we define relevant terms to provide clarity for subsequent sections.
+
+\subsection{Elements of Cloud Benchmarking}
+\label{elems_of_bench}
+
+Cloud benchmarking typically involves a System Under Test (SUT) and a workload generator. The SUT may represent a single cloud service or an entire application containing components of interest. The workload generator applies artificial load on the SUT while tracking the metric of interest. In this thesis, a AWS service pair consisting of a compute instance and a datastore constitutes the SUT. However, when the compute instance itself generates load on the datastore, the tool or executable responsible for load generation is considered the workload generator.
+
+Workload generation is a critical element of cloud benchmarking, as it directly impacts SUT. Two common workload models are open and closed models. In a closed model, a fixed number of concurrent threads independently execute a predefined sequence of tasks iteratively. In contrast, the open model specifies a rate of arrival, such as request per second. The closed model has a fundamental limitation: it ties load generation to task completion. New tasks are only scheduled once a thread completes the previous one, allowing the SUT to self-regulate. If the SUT slows or stalls, incoming load decreases, enabling recovery and potentially skewed results.
+
+A benchmarking run refers to a single timed execution of a predefined set of tests or workloads to evaluate the performance of a SUT under specific conditions. It involves provisioning the resources, initiating the test, collecting relevant performance data, and storing the results for further analysis.
 
 \subsection{Requirements of Cloud Benchmarking}
 
-Cloud benchmarking generally requires relevance to the problem domain, affordability, and simplicity to ensure usability and trust. Benchmarks must allow fair comparisons, be repeatable under similar conditions, and realistically reflect typical workloads. Configurability and scalability are essential for adapting benchmarks to diverse scenarios while maintaining alignment with real-world applications. Additionally, meaningful metrics are critical for interpreting system performance effectively. However, according to use-case and limitations, tradeoffs between these requirements might be required.
+Cloud benchmarking requires several general considerations: \textbf{Relevance} ensures that the benchmarks reflect real-world scenarios and test conditions that align with the application needs. \textbf{Repeatability} ensures that results can be consistently reproduced under similar conditions, enhancing the reliability of the findings. \textbf{Fairness} is vital to ensure that all SUTs are compared equitably, with identical configurations, resources, and network conditions to avoid bias. \textbf{Affordability} focuses on minimizing the costs of conducting the benchmark, particularly when using cloud resources with strict budget constraints. Addtionally, \textbf{simplicity} is important for creating benchmarks that are easy to understand, interpret, and build trust.
 
-Benchmarks should measure deviations from an ideal case, incorporate failure scenarios, and use meaningful cost metrics. They must account for geo-distribution, stress tests, and scalability under variable loads. Long-running experiments and adaptable configurations ensure relevance as applications evolve.
+To meet advanced cloud benchmarking requirements, benchmarks should account for \textbf{failure scenarios}, testing how services handle failure conditions. They must also consider the \textbf{geo-distribution} of both measurement clients and the SUT, reflecting real-world, geographically dispersed applications. Additionally, benchmarks should provoke \textbf{stress situations} to measure qualities like \textbf{scalability and elasticity}, using variable load patterns to test service limits. The design must ensure \textbf{detailed data capture}, avoiding reliance solely on aggregate values, and should track resource consumption and costs across various components using monitoring tools. Finally, benchmarks should be \textbf{long-running} and executed across different times of day and days of the week to capture stabilized behavior, short-term effects, and seasonal variations \cite{book_bermbach_cloud_service_benchmarking}.
 
-A major challenge for this thesis is to conduct the benchmarking under limitations of AWS Free Tier\footcite{https://aws.amazon.com/free/}, hence affordability is a major requirement for us. 
+Trade-offs between requirements are inevitable, as some are inherently conflicting. For example, prioritizing relevance may lead to complex applications that reduce simplicity, while long-running experiments can increase costs, affecting affordability. Therefore, it is essential to carefully consider all requirements and make conscious trade-offs based on the benchmarking goals and scope \cite{book_bermbach_cloud_service_benchmarking}.
 
-\subsection{Elements of a Cloud Benchmark}
-\label{elems_of_bench}
-
-define Workload Generator, SUT, k6, AWS services, refer instance with service name
-
-\subsection{Challenges}
+\subsection{Terms and Definitions}
 \label{challenges}
 
-define, ddb provisioned capacity, lambda concurrency,
+\paragraph{k6\footcite{https://k6.io/open-source/}}
+k6 is an open-source and extensible workload generation tool. It uses JavaScript-based test scripts to define workloads, specifying parameters such as duration, arrival rate (or concurrent threads), load patterns, and operations on the SUT. It is written in the golang with embedded JavaScript engine\footcite{https://github.com/grafana/k6}.
 
-What can be controlled by client and what not.
-\hl{--> BACKGROUND: AWS provides numerous configurations and tools for optimizing service interactions, yet the specific latency characteristics between services can vary depending on network setup, service proximity, caching strategies, and service-specific characteristics. <--}
-What is a benchmarking run?
-What is open vs. closed workload model?
+%\paragraph{EC2}
+%EC2 is a compute service that provides scalable virtual computing resources, allowing users to deploy and manage virtual machines (instances) with varying configurations of CPU, memory, storage, and networking.
+
+\paragraph{Lambda}
+Lambda is a serverless compute service that automatically runs code in response to events, eliminating the need to manage underlying infrastructure. It scales automatically based on incoming requests, with users only charged for execution time. It introduces cold starts, where a new execution environment is initialized when the function is invoked after being idle, causing slight latency. To reduce this, provisioned concurrency keeps a predefined number of instances ready to handle requests, while reserved concurrency limits the maximum concurrent executions per function.
+
+%\paragraph{RDS}
+%RDS is a managed database service that supports various relational database engines, including MySQL, PostgreSQL, and Aurora.
+
+\paragraph{DynamoDB}
+DynamoDB is a fully managed NoSQL database service designed for low-latency, high-throughput applications. It supports the provisioned capacity mode, where users allocate Read Capacity Units (RCUs) and Write Capacity Units (WCUs) to define the number of reads and writes per second the database can handle. An RCU represents one strongly consistent read per second for an item up to 4 KB, while a WCU allows one write per second for an item up to 1 KB. 
+
+%\paragraph{S3}
+%Amazon S3 (Simple Storage Service) is a scalable, highly durable, and secure object storage service designed to store and retrieve any amount of data from anywhere.
+

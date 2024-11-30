@@ -26,7 +26,7 @@ Unlike RDS and DynamoDB, \hyperref[fig:ts_s3_const]{Figure 5.2.5} and \hyperref[
 Across both runs and workloads, EC2-S3 records 128 outliers with latencies between $22ms$ and $834ms$, while Lambda-S3 records 148 outliers, ranging from $26ms$ to $390ms$.
 
 \paragraph*{Summary}
-The benchmark results indicate that RDS, DynamoDB, and S3 paired with EC2 generally outperform those paired with Lambda in terms of mean latency. However, the latency difference between EC2- and Lambda-based pairs remains minimal, consistently under $1.34ms$ across all experiments. Standard deviation and outliers, on the other hand, do not show a consistent pattern across the pairs. 
+The benchmark results indicate that RDS, DynamoDB, and S3 paired with EC2 generally outperform those paired with Lambda in terms of mean latency. However, the absolute difference between EC2- and Lambda-based pairs mean latencies remains minimal, consistently under $1.34ms$ across all experiments. Standard deviation and outliers, on the other hand, do not show a consistent pattern across the pairs. 
 
 \begin{figure}[h]
 	\begin{subfigure}{0.49\linewidth}

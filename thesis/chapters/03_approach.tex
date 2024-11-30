@@ -1,7 +1,7 @@
 \section{Benchmark Design}
 \label{cha:approach}
 
-In this section, we present our approach to benchmark AWS compute and datastore service pairs, while addressing requirements and challenges discussed in \cref{cha:background}. Affordability is a major requirement in this thesis, which influences design and implementation decisions while necessitating trade-offs with other requirements.
+In this section, we present our approach to benchmark AWS compute and datastore service pairs, while addressing requirements and challenges discussed in \cref{cha:background}. Affordability is a major requirement in this thesis, as the whole experiment is conducted within the limits of AWS Free Tier\footcite{https://aws.amazon.com/free/}. This influences design and implementation decisions while necessitating trade-offs with other requirements.
 
 \cref{cha:intro,cha:background} highlight the importance of access latency in applications and it is the primary metric of interest in this thesis. To isolate access latency, we focus on read-only operations between compute and datastore services, to avoid locking and transactional overheads in writes. Queries are kept simple, database tables, and object files minimal to reduce querying and data transmission overhead. While mixed read-write workloads, larger databases, and complex queries reflect real-world scenarios, simple read-only benchmarks can provide initial baseline latency performance. Additionally, focusing on reads is cost-effective, as services like S3 offer significantly more free-tier reads compared to writes.
 

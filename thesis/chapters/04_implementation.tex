@@ -26,7 +26,7 @@ A single S3 bucket with a 20-byte text file.
 An EC2 instance of t2.micro type with 1GiB RAM, and 1vCPU, located in the eu-central-1a availability zone. It is operated by Ubuntu Server 24.04 (HVM-based) and is equipped with the k6 and corresponding test scripts.
 
 \textbf{Lambda}:
-A non-VPC Node.js 20 function with 1.65GiB RAM, 1vCPU, and reserved concurrency set to 990. The configuration of Lambda-Helper is identical to that of EC2.
+A non-VPC Node.js 20 function with 1.65GiB RAM, 1vCPU, and reserved concurrency set to 990. The configuration of Lambda-Helper is identical to that of EC2. \hl{CPU-Boost for cold starts?}
 
 \subsection{Workload Generation}
 \label{sec:loads}
@@ -53,7 +53,7 @@ As noted, the monthly limits for S3 are relatively low, specifically 20000 GET r
 
 As discussed, for each targeted datastore service, we compare latency performance across EC2 and Lambda. Mean values alone cannot fully capture the behavior of access latency throughout the experiment, so we use bar plots for aggregated metrics and time-series graphs to provide a comprehensive view of the data.
 
-In our context, outliers in latency values may indicate potential network issues between services and can distort analysis, particularly when calculating averages \cite{book_bermbach_cloud_service_benchmarking}. To address this, we identify and remove outliers using the 3-sigma rule, which defines data points beyond three standard deviations from the mean as outliers \cite{}. However, the number and extent of these outliers provide valuable insights into a service pair's performance and reliability. Therefore, we also analyze and report outliers to understand their implications and highlight variations between pairs.
+In our context, outliers in latency values may indicate potential network issues between services and can distort analysis, particularly when calculating averages \cite{book_bermbach_cloud_service_benchmarking}. To address this, we identify and remove outliers using the 3-sigma rule, which defines data points beyond three standard deviations from the mean as outliers \cite{book_han_data_mining}. However, the number and extent of these outliers provide valuable insights into a service pair's performance and reliability. Therefore, we also analyze and report outliers to understand their implications and highlight variations between pairs.
 
 
 

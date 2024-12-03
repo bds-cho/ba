@@ -22,6 +22,47 @@
 	year={2011}
 }
 
+@article{article_schad_cloud_var,
+	author = {Schad, J\"{o}rg and Dittrich, Jens and Quian\'{e}-Ruiz, Jorge-Arnulfo},
+	title = {Runtime measurements in the cloud: observing, analyzing, and reducing variance},
+	year = {2010},
+	issue_date = {September 2010},
+	publisher = {VLDB Endowment},
+	volume = {3},
+	number = {1–2},
+	issn = {2150-8097},
+	url = {https://doi.org/10.14778/1920841.1920902},
+	doi = {10.14778/1920841.1920902},
+	journal = {Proc. VLDB Endow.},
+	month = sep,
+	pages = {460–471},
+	numpages = {12}
+}
+
+@article{article_eismann_lambda_var,
+	title = {A case study on the stability of performance tests for serverless applications},
+	journal = {Journal of Systems and Software},
+	volume = {189},
+	pages = {111294},
+	year = {2022},
+	issn = {0164-1212},
+	doi = {https://doi.org/10.1016/j.jss.2022.111294},
+	url = {https://www.sciencedirect.com/science/article/pii/S0164121222000498},
+	author = {Simon Eismann and Diego Elias Costa and Lizhi Liao and Cor-Paul Bezemer and Weiyi Shang and André {van Hoorn} and Samuel Kounev},
+	keywords = {Serverless, FaaS, Function-as-a-Service, Performance, Stability, Reproducibility},
+}
+
+@article{article_dancheva_ec2_var,
+	title={Cloud benchmarking and performance analysis of an HPC application in Amazon EC2},
+	author={Dancheva, Tamara and Alonso, Unai and Barton, Michael},
+	journal={Cluster Computing},
+	volume={27},
+	number={2},
+	pages={2273--2290},
+	year={2024},
+	publisher={Springer}
+}
+
 
 % --- BOOK ---
 
@@ -33,6 +74,17 @@
     publisher = "Springer",
     address = "Cham, Switzerland",
     editor = MISSING
+}
+
+@book{book_han_data_mining,
+	title={Data Mining: Concepts and Techniques},
+	author={Han, J. and Kamber, M. and Pei, J.},
+	isbn={9780123814807},
+	lccn={2011010635},
+	series={The Morgan Kaufmann Series in Data Management Systems},
+	url={https://books.google.de/books?id=pQws07tdpjoC},
+	year={2011},
+	publisher={Morgan Kaufmann}
 }
 
 % --- INCOLLECTION ---
@@ -68,7 +120,7 @@
 
 @inproceedings{paper_binnig_weather,
 	title={How is the weather tomorrow? Towards a benchmark for the cloud},
-	author={Binnig, Carsten and Kossmann, Donald and Kraska, Tim and Loesing, Simon},
+	author={Binnig, C. and Kossmann, D. and Kraska, T. and Loesing, S.},
 	booktitle={Proceedings of the Second International Workshop on Testing Database Systems},
 	pages={1--6},
 	year={2009}
@@ -100,18 +152,87 @@
 	organization={IEEE}
 }
 
-@inproceedings{paper_bermbach_benchmarking,
-	title={Benchmarking eventual consistency: Lessons learned from long-term experimental studies},
-	author={Bermbach, David and Tai, Stefan},
-	booktitle={2014 IEEE International Conference on Cloud Engineering},
-	pages={47--56},
-	year={2014},
-	organization={IEEE}
+@inproceedings {paper_brooker_lambda,
+	author = {Marc Brooker and Mike Danilov and Chris Greenwood and Phil Piwonka},
+	title = {On-demand Container Loading in {AWS} Lambda},
+	booktitle = {2023 USENIX Annual Technical Conference (USENIX ATC 23)},
+	year = {2023},
+	isbn = {978-1-939133-35-9},
+	address = {Boston, MA},
+	pages = {315--328},
+	url = {https://www.usenix.org/conference/atc23/presentation/brooker},
+	publisher = {USENIX Association},
+	month = jul
+}
+
+@inproceedings {paper_agache_firecracker,
+	author = {Alexandru Agache and Marc Brooker and Alexandra Iordache and Anthony Liguori and Rolf Neugebauer and Phil Piwonka and Diana-Maria Popa},
+	title = {Firecracker: Lightweight Virtualization for Serverless Applications },
+	booktitle = {17th USENIX Symposium on Networked Systems Design and Implementation (NSDI 20)},
+	year = {2020},
+	isbn = {978-1-939133-13-7},
+	address = {Santa Clara, CA},
+	pages = {419--434},
+	url = {https://www.usenix.org/conference/nsdi20/presentation/agache},
+	publisher = {USENIX Association},
+	month = feb
+}
+
+@inproceedings{paper_ginzburg_lambda_var,
+	author = {Ginzburg, Samuel and Freedman, Michael J.},
+	title = {Serverless Isn't Server-Less: Measuring and Exploiting Resource Variability on Cloud FaaS Platforms},
+	year = {2021},
+	isbn = {9781450382045},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3429880.3430099},
+	doi = {10.1145/3429880.3430099},
+	pages = {43–48},
+	numpages = {6},
+	location = {Delft, Netherlands},
+	series = {WoSC '20}
+}
+
+@inproceedings{paper_lambion_lambda_var,
+	author = {Lambion, Danielle and Schmitz, Robert and Cordingly, Robert and Heydari, Navid and Lloyd, Wes},
+	title = {Characterizing X86 and ARM Serverless Performance Variation: A Natural Language Processing Case Study},
+	year = {2022},
+	isbn = {9781450391597},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3491204.3543506},
+	doi = {10.1145/3491204.3543506},
+	pages = {69–75},
+	numpages = {7},
+	keywords = {function-as-a-service, performance variation, resource contention, serverless computing, topic modeling},
+	location = {Bejing, China},
+	series = {ICPE '22}
 }
 
 % --- MASTERSTHESIS ---
 
 % --- ONLINE ---
+
+@online{repo_aws_firecracker,
+	author = MISSING,
+	organization = "Amazon Web Services",
+	title = "Firecracker: Secure and fast microVMs for serverless computing",
+	url = "https://github.com/firecracker-microvm/firecracker/",
+	month = dec,
+	year = 2024,
+	note = MISSING
+}
+
+@online{web_aws_lambda_security,
+	author = "Thakkar, Mayank and Brooker, Marc and AWS Lambda Security Team",
+	organization = "Amazon Web Services",
+	title = "Security Overview of AWS Lambda",
+	url = "https://docs.aws.amazon.com/whitepapers/latest/security-overview-aws-lambda/",
+	month = dec,
+	year = 2022,
+	note = MISSING
+}
+
 
 % --- PHDTHESIS ---
 

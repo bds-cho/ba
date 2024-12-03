@@ -5,7 +5,7 @@ Access latency generally means time it takes for data to reach from one point to
 %
 From a cloud user's perspective, latency between cloud services can be influenced by certain controllable factors, such as service configuration, choice of region and availability zone, the proximity of resources, selecting instance types or service tiers optimized for low latency, network configuration, caching strategies, and application code optimization. However, underlying cloud infrastructure, especially network conditions remain uncontrollable.
 
-Benchmarking carries different definitions across domains, however in this thesis, it specifically refers to systematically evaluating and comparing access latency between AWS compute and datastore services. Cloud benchmarking is a well-researched field, and the following subsections summarize the key elements and requirements of cloud benchmarking, drawing from existing literature \cite{book_bermbach_cloud_service_benchmarking,paper_cooper_ycsb,paper_folkerts_benchmarking,paper_binnig_weather}. Additionally, we define relevant terms to provide clarity for subsequent sections.
+Benchmarking carries different definitions across domains, however in this thesis, it specifically refers to systematically evaluating and comparing access latency between AWS compute and datastore services. Cloud benchmarking is a well-researched field, therefore the following subsections summarize the key elements and requirements of cloud benchmarking, drawing from existing literature \cite{paper_binnig_weather,paper_cooper_ycsb,paper_folkerts_benchmarking,book_bermbach_cloud_service_benchmarking}. Additionally, we define relevant terms to provide clarity for subsequent sections.
 
 \subsection{Elements of Cloud Benchmarking}
 \label{elems_of_bench}
@@ -29,6 +29,8 @@ Trade-offs between requirements are inevitable, as some are inherently conflicti
 
 \paragraph{k6\footcite{https://k6.io/open-source/}}
 k6 is an open-source and extensible workload generation tool. It uses JavaScript-based test scripts to define workloads, specifying parameters such as duration, arrival rate (or concurrent threads), load patterns, and operations on the SUT. It is written in the golang with embedded JavaScript engine\footcite{https://github.com/grafana/k6}.
+
+\paragraph{VPC} --> \hl{TODO} <--
 
 %\paragraph{EC2}
 %EC2 is a compute service that provides scalable virtual computing resources, allowing users to deploy and manage virtual machines (instances) with varying configurations of CPU, memory, storage, and networking.

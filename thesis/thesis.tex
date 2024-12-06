@@ -76,26 +76,14 @@
 \newpage
 
 \section*{Abstract}
-Cloud computing has grown rapidly, driving the demand for scalable and flexible infrastructure solutions. Amazon Web Services (AWS) leads the market, offering diverse compute and datastore services for various applications. Despite their importance, empirical data on latency dynamics between AWS compute and datastore services remains scarce.
-%
-This thesis addresses this knowledge gap by systematically benchmarking access latency between EC2 and Lambda paired with RDS, DynamoDB, and S3. We evaluate these service pairs under constant and burst workloads. The results show that EC2 pairs consistently achieve lower mean latency than Lambda pairs.
-%
-This study acknowledges certain limitations, including constraints imposed by AWS Free Tier, the focus on a single region, and the exclusion of mixed workload scenarios.
-%
-This work provides foundational insights for designing latency-sensitive cloud applications. It emphasizes the need for further research on multi-region setups, advanced configurations, and mixed workload scenarios to deepen the understanding of AWS service interactions.
+Cloud computing has become essential for modern applications, offering scalable and flexible services. Amazon Web Services (AWS) is a leading provider, yet little empirical data exists on how its compute and datastore services interact in terms of access latency. This thesis benchmarks access latency between EC2 and Lambda compute services paired with RDS, DynamoDB, and S3 datastores under constant and burst workloads. The results reveal that EC2-based pairs consistently deliver lower latency and more stable performance compared to Lambda-based pairs, which show greater variability. These insights can guide cloud architects in designing latency-sensitive applications. However, limitations such as simplified configurations, AWS Free Tier constraints, and single-region testing highlight the need for further studies to explore more complex and distributed scenarios. This thesis provides initial foundational insights that can serve as a basis for further exploration and development.
 
 % GERMAN
 \clearpage
 \begin{otherlanguage}
     {ngerman}
     \section*{Kurzfassung}
-    Cloud Computing hat sich schnell entwickelt und führt zu einer steigenden Nachfrage nach skalierbaren und flexiblen Infrastruktur-Lösungen. Amazon Web Services (AWS) führt den Markt an und bietet eine Vielzahl von Compute- und Datenspeicher-Diensten für unterschiedlichste Anwendungen. Trotz ihrer Bedeutung fehlen jedoch empirische Daten zu den Latenz-Dynamiken zwischen den Compute- und Datenspeicher-Diensten von AWS.
-    %
-    Diese Arbeit schließt diese Wissenslücke, indem sie die Zugriffs-Latenz zwischen EC2 und Lambda in Kombination mit RDS, DynamoDB und S3 systematisch benchmarkt. Diese Dienst-Paare werden unter konstanten und burstigen Arbeitslasten evaluiert. Die Ergebnisse zeigen, dass EC2-Paare durchgehend eine niedrigere durchschnittliche Latenz aufweisen als Lambda-Paare.
-    %
-    Die Arbeit erkennt bestimmte Einschränkungen an, darunter die Begrenzungen durch das AWS Free Tier, die Fokussierung auf eine einzelne Region und die Ausschließung gemischter Arbeitslastszenarien.
-    %
-    Diese Arbeit liefert grundlegende Erkenntnisse für das Design latenzempfindlicher Cloud-Anwendungen und betont die Notwendigkeit weiterer Forschung zu Multi-Region-Setups, erweiterten Konfigurationen und gemischten Arbeitslastszenarien, um das Verständnis der Interaktionen zwischen AWS-Diensten zu vertiefen.
+    Cloud-Computing ist unverzichtbar für moderne Anwendungen geworden, da es skalierbare und flexible Dienste bietet. Amazon Web Services (AWS) ist ein führender Anbieter, jedoch es gibt nur wenige empirische Daten darüber, wie seine Compute- und Datenspeicherdienste in Bezug auf Zugriffslatenz zusammenwirken. Diese Arbeit benchmarkt die Zugriffslatenz zwischen den Compute-Diensten EC2 und Lambda in Kombination mit den Datenspeicherdiensten RDS, DynamoDB und S3 unter konstanten und variierenden Arbeitslasten. Die Ergebnisse zeigen, dass EC2-basierte Paare konsistent niedrigere Latenzen und eine stabilere Leistung liefern als Lambda-basierte Paare, die größere Schwankungen aufweisen. Diese Erkenntnisse können Cloud-Architekten dabei unterstützen, latenzsensible Anwendungen zu entwickeln. Einschränkungen wie vereinfachte Konfigurationen, die Beschränkungen des AWS Free Tiers und die Begrenzung auf eine einzige Region verdeutlichen jedoch die Notwendigkeit weiterer Studien, um komplexere und verteilte Szenarien zu untersuchen. Diese Arbeit liefert erste grundlegende Einblicke, die als Basis für weitere Untersuchungen und Entwicklungen dienen können.
 \end{otherlanguage}
 
 \clearpage

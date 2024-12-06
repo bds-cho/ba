@@ -1,11 +1,7 @@
 \section{Conclusion}
 \label{cha:conclusion}
 
-Cloud computing has experienced rapid growth, becoming integral to industries seeking scalable and flexible solutions. AWS has emerged as a leader, offering diverse services for computing and storage. Despite its significance, limited empirical data exists on the latency characteristics of AWS compute-datastore interactions, necessitating this study to bridge the knowledge gap.
+This thesis systematically explored datastore access latency across AWS compute services, focusing on EC2 and Lambda paired with RDS, DynamoDB, and S3 under varying workloads. The results indicate that EC2 consistently outperforms Lambda in mean latency, however with minor differences. Lambda-based pairs exhibited greater latency variability and susceptibility to performance shifts, likely due to inherent architectural overheads such as cold starts and network contention. These findings emphasize EC2's stability for latency-sensitive applications while highlighting the trade-offs of Lambda's serverless model.
 
-This thesis investigated the latency performance between AWS compute and datastore service pairs, specifically EC2 and Lambda paired with RDS, DynamoDB, and S3. A systematically conducted benchmark evaluated each pair under constant and burst workloads. Results indicated that EC2 pairs consistently demonstrated lower latency compared to Lambda pairs.
-
-The study highlighted the influence of computing service choices on latency performance and provided empirical data to support architectural decisions in cloud environments. Despite limitations, such as the constraints of AWS Free Tier and the exclusion of mixed workload scenarios, the findings offer foundational insights into the dynamics of service interactions in AWS.
-
-Future work can expand on these results by exploring higher-tier configurations, multi-region setups, and mixed read-write workloads to provide a more comprehensive understanding of cloud service latency characteristics.
+The study also faced limitations, including constraints of the AWS Free Tier, the use of simplified configurations, and single-region setups. These factors underscore the need for future research to incorporate multi-region benchmarks, advanced configurations, and mixed workload scenarios for a deeper understanding of cloud service interactions. The insights gained from this work provide a foundation for cloud architects and application developers to optimize AWS service selections, balancing performance, scalability, and cost-efficiency.
 

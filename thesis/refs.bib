@@ -15,13 +15,6 @@
 	publisher={ACM New York, NY, USA}
 }
 
-@article{article_mell_nist,
-	title={The NIST Definition of Cloud Computing},
-	author={Mell, P},
-	journal={Recommendations of the National Institute of Standards and Technology},
-	year={2011}
-}
-
 @article{article_schad_cloud_var,
 	author = {Schad, J\"{o}rg and Dittrich, Jens and Quian\'{e}-Ruiz, Jorge-Arnulfo},
 	title = {Runtime measurements in the cloud: observing, analyzing, and reducing variance},
@@ -74,7 +67,6 @@
 	number = {3},
 	url = {https://doi.org/10.1145/3570609},
 	doi = {10.1145/3570609},
-	abstract = {Cloud computing represents an appealing opportunity for cost-effective deployment of HPC workloads on the best-fitting hardware. However, although cloud and on-premise HPC systems offer similar computational resources, their network architecture and performance may differ significantly. For example, these systems use fundamentally different network transport and routing protocols, which may introduce network noise that can eventually limit the application scaling. This work analyzes network performance, scalability, and cost of running HPC workloads on cloud systems. First, we consider latency, bandwidth, and collective communication patterns in detailed small-scale measurements, and then we simulate network performance at a larger scale. We validate our approach on four popular cloud providers and three on-premise HPC systems, showing that network (and also OS) noise can significantly impact performance and cost both at small and large scale.},
 	journal = {Proc. ACM Meas. Anal. Comput. Syst.},
 	month = dec,
 	articleno = {49},
@@ -106,6 +98,16 @@
 	publisher={Morgan Kaufmann}
 }
 
+@book{book_popescu_netlat,
+	title={Characterizing the impact of network latency on cloud-based applications’ performance}, 
+	url={https://www.repository.cam.ac.uk/handle/1810/270654},
+	DOI={10.17863/CAM.17588},
+	institution={Computer Laboratory technical reports},
+	author={Popescu, DA and Zilberman, Noa and Moore, Andrew},
+	year={2017}, 
+	keywords={Application Performance, Data Centres, Network Latency, Network Measurement}
+}
+
 % --- INCOLLECTION ---
 
 
@@ -114,7 +116,7 @@
 @inproceedings{paper_cooper_ycsb,
     author = "Cooper, Brian F. and Silberstein, Adam and Tam, Erwin and Ramakrishnan, Raghu and Sears, Russell",
     title = "Benchmarking Cloud Serving Systems with YCSB",
-    booktitle = "Proceedings of the 1st ACM Symposium on Cloud Computing",
+    booktitle = "Proceedings of the 1st ACM Symposium on Cloud Computing", 
     pages = "143--154",
     month = MISSING,
     year = 2010,
@@ -241,18 +243,66 @@
 	month = jul
 }
 
+@inproceedings{paper_villamizar_lambdaXec2,
+	author={Villamizar, Mario and Garcés, Oscar and Ochoa, Lina and Castro, Harold and Salamanca, Lorena and Verano, Mauricio and Casallas, Rubby and Gil, Santiago and Valencia, Carlos and Zambrano, Angee and Lang, Mery},
+	booktitle={2016 16th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGrid)}, 
+	title={Infrastructure Cost Comparison of Running Web Applications in the Cloud Using AWS Lambda and Monolithic and Microservice Architectures}, 
+	year={2016},
+	volume={},
+	number={},
+	pages={179-182},
+	doi={10.1109/CCGrid.2016.37}
+}
+
+@inproceedings {paper_klimovic_lambdaXs3,
+	author = {Ana Klimovic and Yawen Wang and Christos Kozyrakis and Patrick Stuedi and Jonas Pfefferle and Animesh Trivedi},
+	title = {Understanding Ephemeral Storage for Serverless Analytics},
+	booktitle = {2018 USENIX Annual Technical Conference (USENIX ATC 18)},
+	year = {2018},
+	isbn = {978-1-939133-01-4},
+	address = {Boston, MA},
+	pages = {789--794},
+	url = {https://www.usenix.org/conference/atc18/presentation/klimovic-serverless},
+	publisher = {USENIX Association},
+	month = jul
+}
+
+@inproceedings{paper_palepu_lambdaXs3ddb,
+	author = {Palepu, Surya Chaitanya and Chahal, Dheeraj and Ramesh, Manju and Singhal, Rekha},
+	title = {Benchmarking the Data Layer Across Serverless Platforms},
+	year = {2022},
+	isbn = {9781450393119},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3526060.3535460},
+	doi = {10.1145/3526060.3535460},
+	booktitle = {Proceedings of the 2nd Workshop on High Performance Serverless Computing},
+	pages = {3–7},
+	numpages = {5},
+	keywords = {benchmarking, cloud-storage, data-transfer, serverless},
+	location = {Minneapolis, MN, USA},
+	series = {HiPS '22}
+}
+
+@inproceedings{paper_albu_lambdaec2,
+	title={Function-as-a-service x platform-as-a-service: Towards a comparative study on FaaS and PaaS},
+	author={Albuquerque Jr, Lucas F and Ferraz, Felipe Silva and Oliveira, RFAP and Galdino, S},
+	booktitle={ICSEA},
+	pages={206--212},
+	year={2017}
+}
+
 % --- MASTERSTHESIS ---
 
 % --- ONLINE ---
 
-@online{repo_aws_firecracker,
-	author = MISSING,
-	organization = "Amazon Web Services",
-	title = "Firecracker: Secure and fast microVMs for serverless computing",
-	url = "https://github.com/firecracker-microvm/firecracker/",
-	month = dec,
+@online{repo_firecracker,
+	author = {Firecracker},
+	title = {Firecracker: Secure and fast microVMs for serverless computing},
+	url = "https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-performance.md",
+	month = nov,
 	year = 2024,
-	note = MISSING
+	note = {Accessed: Dec. 1, 2024}
 }
 
 @online{web_aws_lambda_security,
@@ -262,7 +312,17 @@
 	url = "https://docs.aws.amazon.com/whitepapers/latest/security-overview-aws-lambda/",
 	month = dec,
 	year = 2022,
-	note = MISSING
+	note = {Accessed: Dec. 1, 2024}
+}
+
+@online{web_richter_cloud_market,
+	author = "Richter, Felix",
+	organization = "Statista",
+	title = "Worldwide Market Share of Leading Cloud Infrastructure Service Providers",
+	url = "https://www.statista.com/chart/18819/",
+	month = nov,
+	year = 2024,
+	note = {Accessed: Dec. 1, 2024}
 }
 
 
@@ -283,6 +343,18 @@
 % --- INCOLLECTION ---
 
 % --- INPROCEEDINGS ---
+
+@inproceedings{paper_zilberman_netlat,
+	author="Zilberman, Noa and Grosvenor, Matthew and Popescu, Diana Andreea and Manihatty-Bojan, Neelakandan and Antichi, Gianni and W{\'o}jcik, Marcin and Moore, Andrew W.",
+	editor="Kaafar, Mohamed Ali and Uhlig, Steve and Amann, Johanna",
+	title="Where Has My Time Gone?",
+	booktitle="Passive and Active Measurement",
+	year="2017",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="201--214",
+	isbn="978-3-319-54328-4"
+}
 
 % --- MASTERSTHESIS ---
 

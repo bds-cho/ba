@@ -175,7 +175,9 @@ def final_plot(ec2_df,ec2_stats,lambda_df,lambda_stats):
     q125 = ec2_df['latency'].quantile(.25)
     q150 = ec2_df['latency'].quantile(.5)
     q175 = ec2_df['latency'].quantile(.75)
-    plot1.legend(loc='upper left', title=f"Std Dev: {std1}\nVariance: {var1}\n25% Quantile: {q125}\n50% Quantile: {q150}\n75% Quantile: {q175}")
+    q195 = ec2_df['latency'].quantile(.95)
+    q199 = ec2_df['latency'].quantile(.99)
+    plot1.legend(loc='upper left', title=f"Std Dev: {std1}\nVariance: {var1}\n25th Percentile: {q125}\n50th Percentile: {q150}\n75th Percentile: {q175}\n95th Percentile: {q195}\n99th Percentile: {q199}")
 
     sns.barplot(x='Metric', y='Value', data=lambda_stats, palette='magma', ax=plot2)
     plot2.set_title("Lambda")
@@ -189,7 +191,9 @@ def final_plot(ec2_df,ec2_stats,lambda_df,lambda_stats):
     q225 = lambda_df['latency'].quantile(.25)
     q250 = lambda_df['latency'].quantile(.5)
     q275 = lambda_df['latency'].quantile(.75)
-    plot2.legend(loc='upper left', title=f"Std Dev: {std2}\nVariance: {var2}\n25% Quantile: {q225}\n50% Quantile: {q250}\n75% Quantile: {q275}")
+    q295 = lambda_df['latency'].quantile(.95)
+    q299 = lambda_df['latency'].quantile(.99)
+    plot2.legend(loc='upper left', title=f"Std Dev: {std2}\nVariance: {var2}\n25th Percentile: {q225}\n50th Percentile: {q250}\n75th Percentile: {q275}\n95th Percentile: {q295}\n99th Percentile: {q299}")
     
     plt.tight_layout()
     return fig
